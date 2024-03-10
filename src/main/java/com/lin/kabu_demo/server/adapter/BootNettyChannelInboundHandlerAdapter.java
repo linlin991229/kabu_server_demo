@@ -1,5 +1,7 @@
 package com.lin.kabu_demo.server.adapter;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -24,9 +26,27 @@ public class BootNettyChannelInboundHandlerAdapter extends ChannelInboundHandler
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception, IOException
     {
-        System.out.println("channelRead:read msg:"+msg.toString());
+//        ByteBuf byteBuf = (ByteBuf)msg;
+//        //  长度是可读字节数
+//        byte[] bytes = new byte[byteBuf.readableBytes()];
+//        byteBuf.readBytes(bytes);
+//        for (byte aByte : bytes) {
+//            System.out.println(aByte);
+//        }
         //回应客户端
-        ctx.write("222".getBytes());
+
+        // 1. 创建 ByteBuf 对象
+//        ByteBuf byteBufW = ByteBufAllocator.DEFAULT.ioBuffer();
+//        byteBufW.writeBytes(new byte[]{1,0xA,0xF});
+
+//        ctx.write(byteBufW);
+
+        byte[] bytes = (byte[])msg;
+        for (byte aByte : bytes) {
+            System.out.println(aByte);
+        }
+
+        ctx.write(new byte[]{0xA});
     }
 
     /**
@@ -66,8 +86,8 @@ public class BootNettyChannelInboundHandlerAdapter extends ChannelInboundHandler
     {
         super.channelActive(ctx);
         ctx.channel().read();
-        InetSocketAddress insocket = (InetSocketAddress) ctx.channel().remoteAddress();
-        String clientIp = insocket.getAddress().getHostAddress();
+        InetSocketAddress inSocket = (InetSocketAddress) ctx.channel().remoteAddress();
+        String clientIp = inSocket.getAddress().getHostAddress();
         //此处不能使用ctx.close()，否则客户端始终无法与服务端建立连接
         System.out.println("channelActive:"+clientIp+ctx.name());
     }
