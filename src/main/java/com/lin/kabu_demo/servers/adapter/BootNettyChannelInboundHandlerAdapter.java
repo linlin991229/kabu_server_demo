@@ -1,7 +1,5 @@
-package com.lin.kabu_demo.server.adapter;
+package com.lin.kabu_demo.servers.adapter;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -64,8 +62,8 @@ public class BootNettyChannelInboundHandlerAdapter extends ChannelInboundHandler
     /**
      * 当出现 Throwable 对象才会被调用，即当 Netty 由于 IO 错误或者处理器在处理事件时抛出的异常时
      *
-     * @param ctx
-     * @param cause
+     * @param ctx 上下文
+     * @param cause 异常
      */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws IOException
@@ -119,8 +117,8 @@ public class BootNettyChannelInboundHandlerAdapter extends ChannelInboundHandler
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception, IOException
     {
         super.userEventTriggered(ctx, evt);
-        InetSocketAddress insocket = (InetSocketAddress) ctx.channel().remoteAddress();
-        String clientIp = insocket.getAddress().getHostAddress();
+        InetSocketAddress inSocket = (InetSocketAddress) ctx.channel().remoteAddress();
+        String clientIp = inSocket.getAddress().getHostAddress();
         ctx.close();//超时时断开连接
         System.out.println("userEventTriggered:"+clientIp);
     }

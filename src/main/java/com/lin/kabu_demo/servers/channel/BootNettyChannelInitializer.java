@@ -1,12 +1,10 @@
-package com.lin.kabu_demo.server.channel;
+package com.lin.kabu_demo.servers.channel;
 
-import com.lin.kabu_demo.server.adapter.BootNettyChannelInboundHandlerAdapter;
+import com.lin.kabu_demo.servers.adapter.BootNettyChannelInboundHandlerAdapter;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.handler.codec.bytes.ByteArrayDecoder;
 import io.netty.handler.codec.bytes.ByteArrayEncoder;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 
 
 /**

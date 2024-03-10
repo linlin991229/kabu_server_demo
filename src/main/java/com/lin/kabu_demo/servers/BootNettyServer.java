@@ -1,6 +1,6 @@
-package com.lin.kabu_demo.server;
+package com.lin.kabu_demo.servers;
 
-import com.lin.kabu_demo.server.channel.BootNettyChannelInitializer;
+import com.lin.kabu_demo.servers.channel.BootNettyChannelInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.AdaptiveRecvByteBufAllocator;
 import io.netty.channel.ChannelFuture;
